@@ -19,46 +19,78 @@ namespace school.Controllers.API
 
 
 
+
         // GET: api/Studentt
+
         public IHttpActionResult Get()
         {
-
             return Ok(new { listOfStudents });
         }
+
 
         // GET: api/Studentt/3
         public IHttpActionResult Get(int id)
         {
-            Student student1 = listOfStudents.First((item) => id == item.Id );
-           return Ok(new { student1 });
+            try
+            {
+                Student student1 = listOfStudents.First((item) => id == item.Id);
+                return Ok(new { student1 });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
         }
 
         // POST: api/Studentt
         public IHttpActionResult Post([FromBody] Student obj)
         {
-            listOfStudents.Add(obj);
-            return Ok(new { listOfStudents });
+            try
+            {
+                listOfStudents.Add(obj);
+                return Ok(new { listOfStudents });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
         }
 
         // PUT: api/Studentt/5
         public IHttpActionResult Put(int id, [FromBody] Student obj)
         {
-            Student student1 = listOfStudents.First((item) => id == item.Id);
-            student1.Fname = obj.Fname;
-            student1.Lname = obj.Lname;
-            student1.SchoolClass = obj.SchoolClass;
-            student1.Age = obj.Age;
+            try
+            {
+                Student student1 = listOfStudents.First((item) => id == item.Id);
+                student1.Fname = obj.Fname;
+                student1.Lname = obj.Lname;
+                student1.SchoolClass = obj.SchoolClass;
+                student1.Age = obj.Age;
 
-            return Ok(new { listOfStudents });
+                return Ok(new { listOfStudents });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
 
+            }
         }
 
         // DELETE: api/Studentt/5
         public IHttpActionResult Delete(int id)
         {
-            Student student1 = listOfStudents.First((item) => id == item.Id);
-            listOfStudents.Remove(student1);
-            return Ok(new { listOfStudents });
+            try
+            {
+                Student student1 = listOfStudents.First((item) => id == item.Id);
+                listOfStudents.Remove(student1);
+                return Ok(new { listOfStudents });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
