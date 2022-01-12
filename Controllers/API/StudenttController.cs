@@ -41,9 +41,12 @@ namespace school.Controllers.API
         }
 
         // PUT: api/Studentt/5
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Student obj)
         {
-            
+            Student student1 = listOfStudents.First((item) => id == item.Id);
+
+            return Ok(new { student1 });
+
         }
 
         // DELETE: api/Studentt/5
