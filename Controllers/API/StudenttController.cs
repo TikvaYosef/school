@@ -41,21 +41,24 @@ namespace school.Controllers.API
         }
 
         // PUT: api/Studentt/5
-        public void Put(int id, [FromBody] Student obj)
+        public IHttpActionResult Put(int id, [FromBody] Student obj)
         {
             Student student1 = listOfStudents.First((item) => id == item.Id);
+            student1.Fname = obj.Fname;
+            student1.Lname = obj.Lname;
+            student1.SchoolClass = obj.SchoolClass;
+            student1.Age = obj.Age;
 
-            return Ok(new { student1 });
+            return Ok(new { listOfStudents });
 
         }
 
         // DELETE: api/Studentt/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            foreach (var item in collection)
-            {
-
-            }
+            Student student1 = listOfStudents.First((item) => id == item.Id);
+            listOfStudents.Remove(student1);
+            return Ok(new { listOfStudents });
         }
     }
 }
